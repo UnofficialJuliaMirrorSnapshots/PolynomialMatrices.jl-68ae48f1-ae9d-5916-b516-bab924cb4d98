@@ -61,6 +61,11 @@ end
 end
 
 # Outer constructor
+function PolyMatrix(p::PolyMatrix{T,M,Val{W},N}) where {T,M,W,N}
+  _,v = first(coeffs(p))
+  PolyMatrix(coeffs(p), size(v), Val{W})
+end
+
 function PolyMatrix(d::Dict{Int,M}, var::SymbolLike=:x) where M<:AbstractArray
   PolyMatrix(d, Val{@compat Symbol(var)})
 end
